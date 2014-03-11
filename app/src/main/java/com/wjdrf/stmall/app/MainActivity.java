@@ -1,16 +1,22 @@
 package com.wjdrf.stmall.app;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
+public class MainActivity extends FragmentActivity {
+
+    @InjectView(R.id.main_text) TextView mainText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
     }
 
 
@@ -29,6 +35,7 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            mainText.setText("papersnake");
             return true;
         }
         return super.onOptionsItemSelected(item);
