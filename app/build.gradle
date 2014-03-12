@@ -16,11 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
