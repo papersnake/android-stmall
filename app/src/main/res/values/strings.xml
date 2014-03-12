@@ -4,5 +4,6 @@
     <string name="app_name">Android-stmall</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="token_stmall">stmall</string>
 
 </resources>
