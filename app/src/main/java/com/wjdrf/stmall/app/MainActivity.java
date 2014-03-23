@@ -25,6 +25,8 @@ import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
 public class MainActivity extends FragmentActivity {
 
@@ -99,6 +101,12 @@ public class MainActivity extends FragmentActivity {
             txt_Oauth_Token.setText("hello fragment");
 
             return view;
+        }
+
+
+        @OnClick(R.id.btn_search)
+        public void search(){
+            txt_Oauth_Token.setText("click me!");
         }
 
         @Override
