@@ -7,6 +7,7 @@ package com.wjdrf.stmall.app.services;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 
 public class StmallServices {
@@ -14,6 +15,7 @@ public class StmallServices {
     private static final String API_URL="http://stmall.sinaapp.com";
 
     interface Stmall {
+        @Headers("Accept:text/html,application/xhtml+xml,*/*")
         @GET("/Api/Good/{barcode}")
         void getGood(@Path("barcode") String barcode, Callback<Good> callback);
     }

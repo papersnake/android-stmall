@@ -1,5 +1,6 @@
 package com.wjdrf.stmall.app;
 
+import android.content.Intent;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -106,7 +107,9 @@ public class MainActivity extends FragmentActivity {
 
         @OnClick(R.id.btn_search)
         public void search(){
-            txt_Oauth_Token.setText("click me!");
+            //txt_Oauth_Token.setText("click me!");
+            Intent intent=new Intent(getActivity(),TestActivity.class);
+            getActivity().startActivity(intent);
         }
 
         @Override
