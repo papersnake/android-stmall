@@ -112,4 +112,9 @@ public class Good {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return good_name;
+    }
 }

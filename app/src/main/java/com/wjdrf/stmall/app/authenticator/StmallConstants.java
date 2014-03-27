@@ -22,4 +22,12 @@ public interface StmallConstants {
 
     //private StmallConstants() {
     //}
+
+    public static class Extra {
+        private Extra() {}
+
+        public static final String GOOD_ITEM = "good_item";
+        public static final String SEARCH_KEY = "good_search_key";
+
+    }
 }

@@ -22,4 +22,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="157dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/btn_scan"
+        android:layout_alignTop="@+id/btn_search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
 </RelativeLayout>

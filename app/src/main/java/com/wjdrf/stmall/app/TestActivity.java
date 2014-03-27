@@ -1,6 +1,7 @@
 package com.wjdrf.stmall.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_ITEM;
 
 public class TestActivity extends Activity {
 
@@ -39,7 +41,11 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         ButterKnife.inject(this);
-        StmallServices.getGood(callback);
+
+        Intent intent=getIntent();
+        String codebar=intent.getStringExtra(GOOD_ITEM);
+        StmallServices services = new StmallServices(this);
+        services.getGood(codebar,callback);
     }
 
 

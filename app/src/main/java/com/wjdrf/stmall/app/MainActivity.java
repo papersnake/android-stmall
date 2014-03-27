@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.util.Lists;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.wjdrf.stmall.app.authenticator.OAuth;
 import com.wjdrf.stmall.app.authenticator.StmallConstants;
 
@@ -31,7 +33,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_ITEM;
+
 public class MainActivity extends FragmentActivity {
+
+    private static final String FRA_TAG="main_fragment";
 
     @InjectView(R.id.main_text) TextView mainText;
 
@@ -47,13 +53,21 @@ public class MainActivity extends FragmentActivity {
 
         if(fm.findFragmentById(android.R.id.content) == null ){
             OAuthFragment frg=new OAuthFragment();
-            fm.beginTransaction().add(android.R.id.content,frg).commit();
+            fm.beginTransaction().add(android.R.id.content,frg,FRA_TAG).commit();
         }
 
 
         //Credential credential = oauth.authorizeExplicitly("stmall").getResult();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(FRA_TAG);
+        if(fragment!=null) {
+            fragment.onActivityResult(requestCode,resultCode,data);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,6 +131,18 @@ public class MainActivity extends FragmentActivity {
         }
 
         @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+            if(scanResult !=null) {
+                //txt_Oauth_Token.setText(scanResult.getContents());
+                Intent intent=new Intent(getActivity(),TestActivity.class);
+                intent.putExtra(GOOD_ITEM,scanResult.getContents());
+                getActivity().startActivity(intent);
+            }
+        }
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view= inflater.inflate(R.layout.oauth_fragment,container,false);
             ButterKnife.inject(this,view);
@@ -133,6 +159,11 @@ public class MainActivity extends FragmentActivity {
             getActivity().startActivity(intent);
         }
 
+        @OnClick(R.id.btn_scan)
+        public void scan() {
+            IntentIntegrator.initiateScan(getActivity());
+        }
+
         @Override
         public Loader<Credential> onCreateLoader(int id, Bundle args) {
             getActivity().setProgressBarIndeterminateVisibility(true);
@@ -141,6 +172,9 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onLoadFinished(Loader<Credential> loader, Credential data) {
+
+            StmallApp app=(StmallApp)getActivity().getApplicationContext();
+            app.setToken(data.getAccessToken());
             txt_Oauth_Token.setText(data.getAccessToken());
             getActivity().setProgressBarIndeterminateVisibility(false);
         }

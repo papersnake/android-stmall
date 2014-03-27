@@ -23,6 +23,10 @@ android {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url "https://raw.github.com/embarkmobile/zxing-android-minimal/mvn-repo/maven-repository/"
+    }
 }
 
 
@@ -49,5 +53,7 @@ dependencies {
         exclude group:'xpp3', module: 'xpp3'
         exclude group: 'com.google.android', module: 'android'
     }
+    compile 'com.google.zxing:core:3.0.0'
+    compile 'com.embarkmobile:zxing-android-minimal:1.2.0@aar'
 
 }
