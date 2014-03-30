@@ -2,19 +2,23 @@ package com.wjdrf.stmall.app;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.devspark.progressfragment.ProgressListFragment;
 import com.wjdrf.stmall.app.services.Good;
 import com.wjdrf.stmall.app.services.StmallServices;
 
@@ -22,6 +26,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.Optional;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -38,14 +43,8 @@ public class SearchResultsActivity extends FragmentActivity {
         ActionBar actionBar=getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
 
-        String searchKey=null;
-        if(intent !=null) {
-            searchKey=intent.getStringExtra(SEARCH_KEY);
-        }
-
-        GoodListFragment fragment= new GoodListFragment(searchKey);
+        GoodListFragment fragment= new GoodListFragment();
 
 
         if (savedInstanceState == null) {
@@ -76,27 +75,73 @@ public class SearchResultsActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static class GoodAdapter extends ArrayAdapter<Good> {
+
+        private final LayoutInflater mInflater;
+
+        public GoodAdapter(Context context) {
+            super(context, R.layout.goot_list_item);
+            mInflater = LayoutInflater.from(context);
+        }
+
+        public void setData(List<Good> goods){
+            addAll(goods);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if(convertView ==null) {
+                convertView=mInflater.inflate(R.layout.goot_list_item,parent,false);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder)convertView.getTag();
+            }
+
+            Good good = getItem(position);
+
+            holder.goodName.setText(good.getGood_name());
+            holder.goodCodeBar.setText(good.getBarcode());
+
+            return convertView;
+        }
+
+        static class ViewHolder {
+            @Optional @InjectView(R.id.txt_good_name) TextView goodName;
+            @Optional @InjectView(R.id.txt_goodcodebar) TextView goodCodeBar;
+
+            public ViewHolder(View view) {
+                ButterKnife.inject(this,view);
+            }
+        }
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class GoodListFragment extends ListFragment {
+    public static class GoodListFragment extends ProgressListFragment {
         @InjectView(R.id.txt_searchkey) TextView txt_SearchKey;
 
         private String query;
-        private String searchKey;
         ListView mListView;
 
-        public GoodListFragment(String search_key) {
-            searchKey=search_key;
-            //mLis
+        public GoodListFragment() {
         }
 
         Callback<List<Good>> callback= new Callback<List<Good>>() {
             @Override
             public void success(List<Good> goods, Response response) {
-                ArrayAdapter<Good> adapter = new ArrayAdapter<Good>(getActivity().getApplicationContext(),
-                        android.R.layout.simple_list_item_1,goods);
-                getListView().setAdapter(adapter);
+                if(goods!=null) {
+                    //ArrayAdapter<Good> adapter = new ArrayAdapter<Good>(getActivity().getApplicationContext(),
+                    //        android.R.layout.simple_list_item_1, goods);
+                    GoodAdapter adapter = new GoodAdapter(getActivity());
+                    adapter.setData(goods);
+                    getListView().setAdapter(adapter);
+                    setListShown(true);
+                }else{
+                    setListShown(true);
+                }
             }
 
             @Override
@@ -109,9 +154,12 @@ public class SearchResultsActivity extends FragmentActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
+
+            setEmptyText(R.string.empty);
+            setListShown(false);
             if(Intent.ACTION_SEARCH.equals(getActivity().getIntent().getAction())) {
                 query = getActivity().getIntent().getStringExtra(SearchManager.QUERY);
-                txt_SearchKey.setText(query);
+                //txt_SearchKey.setText(query);
 
                 StmallServices services=new StmallServices(getActivity());
 
@@ -121,7 +169,7 @@ public class SearchResultsActivity extends FragmentActivity {
         }
 
 
-
+        /*
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -130,6 +178,6 @@ public class SearchResultsActivity extends FragmentActivity {
 
 
             return rootView;
-        }
+        }*/
     }
 }

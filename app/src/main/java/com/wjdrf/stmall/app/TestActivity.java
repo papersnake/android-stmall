@@ -21,18 +21,23 @@ import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_ITEM
 
 public class TestActivity extends Activity {
 
-    @InjectView(R.id.txt_good_name) TextView txtGoodName;
+    @InjectView(R.id.txt_good_name)
+    TextView txtGoodName;
 
-    Callback<Good> callback= new Callback<Good>() {
+    Callback<Good> callback = new Callback<Good>() {
         @Override
         public void success(Good good, Response response) {
-            txtGoodName.setText(good.getGood_name());
+            if(good!=null) {
+                txtGoodName.setText(good.getGood_name());
+            }else{
+                txtGoodName.setText(R.string.empty);
+            }
         }
 
         @Override
         public void failure(RetrofitError error) {
             //txtGoodName.setText(error.getMessage());
-            Log.d("TEST",error.getUrl());
+            Log.d("TEST", error.getUrl());
         }
     };
 
@@ -42,16 +47,16 @@ public class TestActivity extends Activity {
         setContentView(R.layout.activity_test);
         ButterKnife.inject(this);
 
-        Intent intent=getIntent();
-        String codebar=intent.getStringExtra(GOOD_ITEM);
+        Intent intent = getIntent();
+        String codebar = intent.getStringExtra(GOOD_ITEM);
         StmallServices services = new StmallServices(this);
-        services.getGood(codebar,callback);
+        services.getGood(codebar, callback);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.test, menu);
         return true;

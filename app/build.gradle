@@ -19,6 +19,11 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    compileOptions  {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 repositories {
@@ -55,5 +60,6 @@ dependencies {
     }
     compile 'com.google.zxing:core:3.0.0'
     compile 'com.embarkmobile:zxing-android-minimal:1.2.0@aar'
+    compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.0'
 
 }

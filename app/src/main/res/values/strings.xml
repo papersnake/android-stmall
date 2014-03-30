@@ -8,5 +8,6 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="search_hint">品名/条码/规格</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="empty">无有找到任何数据</string>
 
 </resources>
