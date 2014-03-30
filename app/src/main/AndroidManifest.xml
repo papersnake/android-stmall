@@ -28,6 +28,10 @@
         <activity
             android:name="com.wjdrf.stmall.app.TestActivity"
             android:label="@string/title_activity_test" >
+            <intent-filter>
+                <action android:name="com.wjdrf.stmall.app.GOOD_VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SearchResultsActivity"

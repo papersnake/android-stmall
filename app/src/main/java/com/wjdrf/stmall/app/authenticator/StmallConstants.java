@@ -28,6 +28,13 @@ public interface StmallConstants {
 
         public static final String GOOD_ITEM = "good_item";
         public static final String SEARCH_KEY = "good_search_key";
+        public static final String GOOD_OBJ = "good_obj";
 
+    }
+
+    public static class Action {
+        private Action() {}
+
+        public static final String ACTION_GOOD_VIEW = "com.wjdrf.stmall.app.GOOD_VIEW";
     }
 }

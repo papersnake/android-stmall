@@ -18,17 +18,56 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_ITEM;
+import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_OBJ;
+
+import com.wjdrf.stmall.app.authenticator.StmallConstants.Action;
 
 public class TestActivity extends Activity {
 
     @InjectView(R.id.txt_good_name)
     TextView txtGoodName;
 
+    @InjectView(R.id.txt_yuanjia)
+    TextView txtYuanJia;
+
+    @InjectView(R.id.txt_jinjia)
+    TextView txtJinJia;
+
+    @InjectView(R.id.txt_tejia)
+    TextView txtTeJia;
+
+    @InjectView(R.id.txt_goodspec)
+    TextView txtGoodSpec;
+
+    @InjectView(R.id.txt_untis)
+    TextView txtUnits;
+
+    @InjectView(R.id.txt_qty)
+    TextView txtQTY;
+
+    @InjectView(R.id.txt_belong)
+    TextView txtBelong;
+
+    public void fillData(Good good){
+        if(good!=null) {
+            setTitle(good.getGood_name());
+            txtGoodName.setText(good.getGood_name());
+            txtYuanJia.append(good.getGood_price().toString());
+            txtJinJia.append(good.getGood_pur_price().toString());
+            txtTeJia.append(good.getGood_tj_price().toString());
+
+            txtGoodSpec.append(good.getGood_spec());
+            txtUnits.append(good.getUnits());
+            txtQTY.append(String.valueOf(good.getGood_num()));
+            txtBelong.append(good.getGood_belong());
+        }
+    }
+
     Callback<Good> callback = new Callback<Good>() {
         @Override
         public void success(Good good, Response response) {
             if(good!=null) {
-                txtGoodName.setText(good.getGood_name());
+                fillData(good);
             }else{
                 txtGoodName.setText(R.string.empty);
             }
@@ -48,9 +87,16 @@ public class TestActivity extends Activity {
         ButterKnife.inject(this);
 
         Intent intent = getIntent();
-        String codebar = intent.getStringExtra(GOOD_ITEM);
-        StmallServices services = new StmallServices(this);
-        services.getGood(codebar, callback);
+
+        if(intent.getAction()!=null && intent.getAction().equals(Action.ACTION_GOOD_VIEW)){
+            Good good = (Good) intent.getExtras().getSerializable(GOOD_OBJ);
+            fillData(good);
+        }else{
+            String codebar = intent.getStringExtra(GOOD_ITEM);
+            StmallServices services = new StmallServices(this);
+            services.getGood(codebar, callback);
+        }
+
     }
 
 

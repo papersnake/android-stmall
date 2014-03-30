@@ -5,4 +5,22 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ConfirmAddDetailViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ConfirmAddDetailHeaderViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">150dip</item>
+    </style>
+
+    <style name="DetailTitleStyle">
+        <item name="android:textColor">@color/secondary_header_separator_color</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
 </resources>

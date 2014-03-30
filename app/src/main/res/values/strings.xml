@@ -9,5 +9,14 @@
     <string name="search_hint">品名/条码/规格</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="empty">无有找到任何数据</string>
+    <string name="detail_price">价格</string>
+    <string name="yuanjia">原价:</string>
+    <string name="jinjia">进价:</string>
+    <string name="tejia">特价:</string>
+    <string name="basic_info">基本信息</string>
+    <string name="goodspec">规格:</string>
+    <string name="good_units">单位:</string>
+    <string name="good_qty">库存:</string>
+    <string name="good_belong">供应商:</string>
 
 </resources>

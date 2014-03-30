@@ -1,9 +1,13 @@
 package com.wjdrf.stmall.app.services;
 
+import java.io.Serializable;
+
 /**
  * Created by papersnake on 14-3-23.
  */
-public class Good {
+public class Good implements Serializable{
+    private static final long serialVersionUID = -6641292855569752036L;
+
     private int id;
     private int good_id;
     private String barcode;
@@ -11,6 +15,7 @@ public class Good {
     private String good_name;
     private String good_spec;
     private Double good_price;
+    private Double good_tj_price;
     private Double good_pur_price;
     private String units;
     private String good_belong;
@@ -71,6 +76,14 @@ public class Good {
 
     public void setGood_price(Double good_price) {
         this.good_price = good_price;
+    }
+
+    public Double getGood_tj_price() {
+        return good_tj_price;
+    }
+
+    public void setGood_tj_price(Double good_tj_price) {
+        this.good_tj_price = good_tj_price;
     }
 
     public Double getGood_pur_price() {

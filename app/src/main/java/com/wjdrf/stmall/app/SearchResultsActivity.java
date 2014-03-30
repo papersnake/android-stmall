@@ -6,19 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressListFragment;
+import com.wjdrf.stmall.app.authenticator.StmallConstants;
 import com.wjdrf.stmall.app.services.Good;
 import com.wjdrf.stmall.app.services.StmallServices;
 
@@ -32,6 +30,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.SEARCH_KEY;
+import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_OBJ;
 
 public class SearchResultsActivity extends FragmentActivity {
 
@@ -127,6 +126,17 @@ public class SearchResultsActivity extends FragmentActivity {
         ListView mListView;
 
         public GoodListFragment() {
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            Good good = ((Good) l.getItemAtPosition(position));
+
+            Intent intent=new Intent(getActivity(),TestActivity.class);
+            intent.setAction(StmallConstants.Action.ACTION_GOOD_VIEW);
+            intent.putExtra(GOOD_OBJ,good);
+
+            startActivity(intent);
         }
 
         Callback<List<Good>> callback= new Callback<List<Good>>() {

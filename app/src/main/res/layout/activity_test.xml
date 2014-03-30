@@ -1,20 +1,267 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.wjdrf.stmall.app.TestActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:orientation="vertical"
+    android:visibility="visible"
+    style="@style/ConfirmAddDetailViewStyle"
+    android:baselineAligned="false">
 
-    <TextView
-        android:text="@string/hello_world"
+    <!--
+      The header contains the contact photo, name, a link to the contact card, and
+      possibly an extra data field to disambiguate contacts with the same name.
+    -->
+    <RelativeLayout
+        style="@style/ConfirmAddDetailHeaderViewStyle">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher" />
+
+        <View
+            android:id="@+id/photo_text_bar"
+            android:layout_width="0dip"
+            android:layout_height="42dip"
+            android:layout_alignBottom="@id/photo"
+            android:layout_alignLeft="@id/photo"
+            android:layout_alignRight="@id/photo"
+            android:layout_alignStart="@id/photo"
+            android:layout_alignEnd="@id/photo"
+            android:background="#7F000000" />
+
+        <ImageButton
+            android:id="@+id/open_details_button"
+            android:src="@drawable/ic_launcher"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="16dip"
+            android:layout_marginEnd="16dip"
+            android:layout_marginBottom="5dip"
+            android:layout_alignBottom="@id/photo_text_bar"
+            android:layout_alignRight="@id/photo_text_bar"
+            android:layout_alignEnd="@id/photo_text_bar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dip"
+            android:orientation="vertical"
+            android:layout_alignBottom="@id/photo"
+            android:layout_alignLeft="@id/photo"
+            android:layout_alignStart="@id/photo"
+            android:layout_toLeftOf="@id/open_details_button"
+            android:layout_toStartOf="@id/open_details_button"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:paddingStart="8dip"
+            android:paddingEnd="8dip">
+
+            <TextView
+                android:id="@+id/txt_good_name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:paddingLeft="8dip"
+                android:paddingStart="8dip"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:text="111111" />
+
+            <TextView
+                android:id="@+id/extra_info"
+                android:layout_width="wrap_content"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:paddingLeft="8dip"
+                android:paddingStart="8dip"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:paddingBottom="4dip"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/open_details_push_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground" />
+
+    </RelativeLayout>
+
+    <!-- Message that gets displayed if the contact is read-only (instead of showing the editor) -->
+
+    <TextView android:id="@+id/read_only_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/txt_good_name"
-        android:lines="3" />
+        android:minHeight="60dip"
+        android:visibility="gone"
+        android:padding="15dip"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-</RelativeLayout>
+    <!-- Container for a single detail field editor when the contact is not read-only -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/info_container"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_price"
+                style="@style/DetailTitleStyle" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/secondary_header_separator_color" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:stretchColumns="0,1,2">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:showDividers="beginning|middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_yuanjia"
+                        android:layout_column="0"
+                        android:text="@string/yuanjia" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jinjia"
+                        android:id="@+id/txt_jinjia"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tejia"
+                        android:id="@+id/txt_tejia"
+                        android:layout_column="2" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic_info"
+                style="@style/DetailTitleStyle" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/secondary_header_separator_color" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:stretchColumns="0,1,2">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:showDividers="beginning|middle"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_goodspec"
+                        android:layout_column="0"
+                        android:text="@string/goodspec" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good_units"
+                        android:id="@+id/txt_untis"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good_qty"
+                        android:id="@+id/txt_qty"
+                        android:layout_column="2" />
+                </TableRow>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="供应商:"
+                    android:id="@+id/txt_belong"
+                    />
+            </TableLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/secondary_header_separator_color"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible" />
+
+    <!-- Action buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/btn_done"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/ok" />
+
+    </LinearLayout>
+
+</LinearLayout>
