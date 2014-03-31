@@ -39,7 +39,7 @@
             android:layout_marginRight="16dip"
             android:layout_marginEnd="16dip"
             android:layout_marginBottom="5dip"
-            android:layout_alignBottom="@id/photo_text_bar"
+            android:layout_alignBottom="@+id/photo_text_bar"
             android:layout_alignRight="@id/photo_text_bar"
             android:layout_alignEnd="@id/photo_text_bar" />
 

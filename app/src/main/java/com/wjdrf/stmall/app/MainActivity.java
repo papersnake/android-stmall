@@ -10,6 +10,7 @@ import android.support.v4.content.Loader;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +40,6 @@ public class MainActivity extends FragmentActivity {
 
     private static final String FRA_TAG="main_fragment";
 
-    @InjectView(R.id.main_text) TextView mainText;
 
 
     @Override
@@ -112,7 +112,6 @@ public class MainActivity extends FragmentActivity {
 
     public static class OAuthFragment extends Fragment implements
             LoaderManager.LoaderCallbacks<Credential> {
-        @InjectView(R.id.oauth_token) TextView txt_Oauth_Token;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -134,7 +133,7 @@ public class MainActivity extends FragmentActivity {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-            if(scanResult !=null) {
+            if(scanResult !=null && !TextUtils.isEmpty(scanResult.getContents())) {
                 //txt_Oauth_Token.setText(scanResult.getContents());
                 Intent intent=new Intent(getActivity(),TestActivity.class);
                 intent.putExtra(GOOD_ITEM,scanResult.getContents());
@@ -146,18 +145,13 @@ public class MainActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view= inflater.inflate(R.layout.oauth_fragment,container,false);
             ButterKnife.inject(this,view);
-            txt_Oauth_Token.setText("hello fragment");
+            //txt_Oauth_Token.setText("hello fragment");
 
             return view;
         }
 
 
-        @OnClick(R.id.btn_search)
-        public void search(){
-            //txt_Oauth_Token.setText("click me!");
-            Intent intent=new Intent(getActivity(),TestActivity.class);
-            getActivity().startActivity(intent);
-        }
+
 
         @OnClick(R.id.btn_scan)
         public void scan() {
@@ -175,7 +169,7 @@ public class MainActivity extends FragmentActivity {
 
             StmallApp app=(StmallApp)getActivity().getApplicationContext();
             app.setToken(data.getAccessToken());
-            txt_Oauth_Token.setText(data.getAccessToken());
+            //txt_Oauth_Token.setText(data.getAccessToken());
             getActivity().setProgressBarIndeterminateVisibility(false);
         }
 

@@ -1,8 +1,11 @@
 package com.wjdrf.stmall.app;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +51,13 @@ public class TestActivity extends Activity {
     @InjectView(R.id.txt_belong)
     TextView txtBelong;
 
+    private ProgressDialog dialog;
+
     public void fillData(Good good){
+        if(dialog.isShowing()){
+            dialog.dismiss();
+
+        }
         if(good!=null) {
             setTitle(good.getGood_name());
             txtGoodName.setText(good.getGood_name());
@@ -69,6 +78,8 @@ public class TestActivity extends Activity {
             if(good!=null) {
                 fillData(good);
             }else{
+                if(dialog.isShowing())
+                    dialog.dismiss();
                 txtGoodName.setText(R.string.empty);
             }
         }
@@ -85,6 +96,14 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         ButterKnife.inject(this);
+
+
+        dialog = ProgressDialog.show(this,"加载中","正在加载信息，请稍候...");
+        dialog.setCancelable(true);
+
+        ActionBar actionBar = getActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
 
@@ -113,11 +132,19 @@ public class TestActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        //int id = item.getItemId();
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
+
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
 }

@@ -29,7 +29,6 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.SEARCH_KEY;
 import static com.wjdrf.stmall.app.authenticator.StmallConstants.Extra.GOOD_OBJ;
 
 public class SearchResultsActivity extends FragmentActivity {
@@ -67,11 +66,19 @@ public class SearchResultsActivity extends FragmentActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        //int id = item.getItemId();
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
+        //return super.onOptionsItemSelected(item);
+
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public static class GoodAdapter extends ArrayAdapter<Good> {
@@ -120,10 +127,8 @@ public class SearchResultsActivity extends FragmentActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class GoodListFragment extends ProgressListFragment {
-        @InjectView(R.id.txt_searchkey) TextView txt_SearchKey;
 
         private String query;
-        ListView mListView;
 
         public GoodListFragment() {
         }
