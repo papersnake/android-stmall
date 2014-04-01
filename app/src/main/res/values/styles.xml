@@ -16,11 +16,18 @@
     </style>
 
     <style name="DetailTitleStyle">
-        <item name="android:textColor">@color/secondary_header_separator_color</item>
+        <item name="android:textColor">@color/Good_info_font_color</item>
         <item name="android:layout_margin">8dp</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
+
+    <style name="DetailInfoFontStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+
 
 </resources>

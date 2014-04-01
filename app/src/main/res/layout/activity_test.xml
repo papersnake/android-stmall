@@ -28,7 +28,7 @@
             android:layout_alignRight="@id/photo"
             android:layout_alignStart="@id/photo"
             android:layout_alignEnd="@id/photo"
-            android:background="#7F000000" />
+            android:background="#7F85b22c" />
 
         <ImageButton
             android:id="@+id/open_details_button"
@@ -41,7 +41,8 @@
             android:layout_marginBottom="5dip"
             android:layout_alignBottom="@+id/photo_text_bar"
             android:layout_alignRight="@id/photo_text_bar"
-            android:layout_alignEnd="@id/photo_text_bar" />
+            android:layout_alignEnd="@id/photo_text_bar"
+            android:clickable="false" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,8 +68,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:singleLine="true"
-                android:text="111111" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/extra_info"
@@ -137,33 +137,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:stretchColumns="0,1,2">
+                android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:showDividers="beginning|middle">
+                    android:showDividers="beginning|middle"
+                    android:layout_marginBottom="16dp"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/txt_yuanjia"
                         android:layout_column="0"
-                        android:text="@string/yuanjia" />
+                        android:text="@string/yuanjia"
+                        android:layout_span="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/jinjia"
                         android:id="@+id/txt_jinjia"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:layout_span="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tejia"
                         android:id="@+id/txt_tejia"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:layout_span="1" />
+                </TableRow>
+                <TableRow
+                    >
+                <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/codebar"
+                android:id="@+id/txt_codebar"
+                    android:layout_column="0"
+                    android:layout_span="2" />
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/goodid"
+                    android:id="@+id/txt_goodid" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>

@@ -18,5 +18,7 @@
     <string name="good_units">单位:</string>
     <string name="good_qty">库存:</string>
     <string name="good_belong">供应商:</string>
+    <string name="codebar">条码:</string>
+    <string name="goodid">货号:</string>
 
 </resources>

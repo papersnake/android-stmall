@@ -51,6 +51,12 @@ public class TestActivity extends Activity {
     @InjectView(R.id.txt_belong)
     TextView txtBelong;
 
+    @InjectView(R.id.txt_codebar)
+    TextView txtCodebar;
+
+    @InjectView(R.id.txt_goodid)
+    TextView txtGoodId;
+
     private ProgressDialog dialog;
 
     public void fillData(Good good){
@@ -64,6 +70,8 @@ public class TestActivity extends Activity {
             txtYuanJia.append(good.getGood_price().toString());
             txtJinJia.append(good.getGood_pur_price().toString());
             txtTeJia.append(good.getGood_tj_price().toString());
+            txtCodebar.append(good.getBarcode());
+            txtGoodId.append(String.valueOf(good.getGood_id()));
 
             txtGoodSpec.append(good.getGood_spec());
             txtUnits.append(good.getUnits());
