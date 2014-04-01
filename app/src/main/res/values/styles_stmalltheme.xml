@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="AutoCompleteTextViewStmallTheme" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/stmalltheme_list_selector_holo_light</item>
+	    <item name="android:background">@drawable/stmalltheme_edit_text_holo_light</item>
+  </style>
+
+  <style name="ButtonStmallTheme" parent="android:Widget.Holo.Light.Button">
+	  <item name="android:background">@drawable/stmalltheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="ImageButtonStmallTheme" parent="android:Widget.Holo.Light.ImageButton">
+	  <item name="android:background">@drawable/stmalltheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="SpinnerStmallTheme" parent="android:Widget.Holo.Light.Spinner">
+      <item name="android:background">@drawable/stmalltheme_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/stmalltheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="TabStmallTheme">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/stmalltheme_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextStmallTheme">
+	  <item name="android:textColor">#000000</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarStmallTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/stmalltheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/stmalltheme_progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
+  <style name="SeekBarStmallTheme" parent="android:Widget.Holo.Light.SeekBar">
+      <item name="android:progressDrawable">@drawable/stmalltheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/stmalltheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:thumb">@drawable/stmalltheme_scrubber_control_selector_holo_light</item>
+  </style>
+
+  <style name="RatingBarStmallTheme" parent="android:Widget.Holo.Light.RatingBar">
+      <item name="android:progressDrawable">@drawable/stmalltheme_ratingbar_full_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/stmalltheme_ratingbar_full_holo_light</item>
+  </style>
+
+  <style name="RatingBarBigStmallTheme" parent="android:Widget.Holo.Light.RatingBar.Indicator">
+      <item name="android:progressDrawable">@drawable/stmalltheme_ratingbar_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/stmalltheme_ratingbar_holo_light</item>
+  </style>
+
+  <style name="RatingBarSmallStmallTheme" parent="android:Widget.Holo.Light.RatingBar.Small">
+      <item name="android:progressDrawable">@drawable/stmalltheme_ratingbar_small_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/stmalltheme_ratingbar_small_holo_light</item>
+  </style>
+
+  <style name="ToggleStmallTheme" parent="android:Widget.Holo.Light.Button.Toggle">
+      <item name="android:background">@drawable/stmalltheme_btn_toggle_holo_light</item>
+  </style>
+
+</resources>
