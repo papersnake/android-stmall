@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.wjdrf.stmall.app.services.Good;
@@ -69,7 +71,11 @@ public class TestActivity extends Activity {
             txtGoodName.setText(good.getGood_name());
             txtYuanJia.append(good.getGood_price().toString());
             txtJinJia.append(good.getGood_pur_price().toString());
-            txtTeJia.append(good.getGood_tj_price().toString());
+            if(good.getGood_tj_price()!=null) {
+                txtTeJia.append(good.getGood_tj_price().toString());
+            }else{
+                txtTeJia.setVisibility(View.GONE);
+            }
             txtCodebar.append(good.getBarcode());
             txtGoodId.append(String.valueOf(good.getGood_id()));
 
